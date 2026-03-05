@@ -438,38 +438,13 @@
   <div class="card">
     <form id="mainForm" novalidate>
 
-      <!-- Section 1: Visit Info -->
-      <div class="section-header">Visit Information</div>
+      <!-- All Fields in Order -->
+      <div class="section-header">Customer Information (Fields 1–12)</div>
       <div class="fields">
         <div class="field">
           <label><span class="num">1</span>Date &amp; Time of Visit</label>
           <input type="datetime-local" name="visitDateTime" id="visitDateTime" required>
         </div>
-        <div class="field">
-          <label><span class="num">8</span>Visit From Location</label>
-          <input type="text" name="visitFromLocation" placeholder="City / Area">
-        </div>
-        <div class="field full">
-          <label><span class="num">9</span>Mode of Visit</label>
-          <div class="radio-group">
-            <label class="radio-option">
-              <input type="radio" name="modeOfVisit" value="Own Vehicle"> 🚗 Own Vehicle
-            </label>
-            <label class="radio-option">
-              <input type="radio" name="modeOfVisit" value="Company Vehicle"> 🚌 Company Vehicle
-            </label>
-            <label class="radio-option">
-              <input type="radio" name="modeOfVisit" value="Other"> 🚕 Other
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <hr class="divider">
-
-      <!-- Section 2: Personal Info -->
-      <div class="section-header">Customer Personal Details</div>
-      <div class="fields">
         <div class="field">
           <label><span class="num">2</span>Full Name *</label>
           <input type="text" name="fullName" placeholder="Enter full name" required>
@@ -494,13 +469,24 @@
           <label><span class="num">7</span>Permanent Address</label>
           <textarea name="permanentAddress" placeholder="Full address with city, state, pincode..."></textarea>
         </div>
-      </div>
-
-      <hr class="divider">
-
-      <!-- Section 3: Interest -->
-      <div class="section-header">Interest &amp; Source</div>
-      <div class="fields">
+        <div class="field">
+          <label><span class="num">8</span>Visit From Location</label>
+          <input type="text" name="visitFromLocation" placeholder="City / Area">
+        </div>
+        <div class="field full">
+          <label><span class="num">9</span>Mode of Visit</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="modeOfVisit" value="Own Vehicle"> 🚗 Own Vehicle
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="modeOfVisit" value="Company Vehicle"> 🚌 Company Vehicle
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="modeOfVisit" value="Other"> 🚕 Other
+            </label>
+          </div>
+        </div>
         <div class="field full">
           <label><span class="num">10</span>Looking For</label>
           <div class="radio-group">
@@ -541,8 +527,6 @@
           <textarea name="customerNotes" placeholder="Any additional info about the customer or visit..."></textarea>
         </div>
       </div>
-
-      <hr class="divider">
 
       <!-- Office Use Section -->
       <div class="section-header-office">🏢 &nbsp;For Office Use Only</div>
