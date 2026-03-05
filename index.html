@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swargaseema – Customer Information Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── Ameya Brand Palette ── */
+  :root {
+    --maroon:       #6b1020;   /* header bg deep */
+    --maroon-mid:   #8b1a1a;   /* header gradient end */
+    --maroon-light: #a82020;   /* hover states */
+    --gold:         #c8962a;   /* logo coin, accents */
+    --gold-light:   #d4a843;   /* lighter gold */
+    --gold-bar:     #e8c060;   /* header gold bar */
+    --cream:        #f5ede0;   /* page bg — warm parchment */
+    --cream-card:   #fdf8f0;   /* card bg */
+    --cream-section:#f0e6d3;   /* section header bg */
+    --available:    #2e7d32;   /* green available */
+    --available-bg: #e8f5e9;
+    --sold-red:     #c62828;   /* sold red */
+    --sold-bg:      #fce8e8;
+    --reserved-amber: #e65100;
+    --reserved-bg:  #fff3e0;
+    --text-dark:    #1a0a0a;
+    --text-mid:     #5a3a3a;
+    --text-light:   #8a6a6a;
+    --white:        #ffffff;
+    --border:       #e8d5c0;
+    --border-focus: #c8962a;
+    --shadow:       0 4px 24px rgba(107,16,32,0.10);
+    --shadow-lg:    0 8px 32px rgba(107,16,32,0.15);
+    --radius:       12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 5% 0%, rgba(107,16,32,0.05) 0%, transparent 40%),
+      radial-gradient(ellipse at 95% 100%, rgba(200,150,42,0.06) 0%, transparent 40%);
+  }
+
+  /* ── Header — matches Ameya dark maroon ── */
+  .site-header {
+    background: linear-gradient(90deg, var(--maroon) 0%, var(--maroon-mid) 100%);
+    color: var(--white);
+    padding: 0;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+  }
+  .logo-mark {
+    width: 48px;
+    height: 48px;
+    background: radial-gradient(circle at 40% 35%, var(--gold-light), var(--gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(200,150,42,0.35), 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .header-text-top {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 2px;
+  }
+  .header-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+  .header-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .status-pill .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot-green  { background: #4caf50; box-shadow: 0 0 6px #4caf50; }
+  .dot-red    { background: #ef5350; box-shadow: 0 0 6px #ef5350; }
+  .gold-bar {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-bar), var(--gold), var(--gold-bar), transparent);
+  }
+
+  /* ── Page wrapper ── */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+
+
+  /* ── Form title ── */
+  .form-title-card {
+    background: linear-gradient(90deg, var(--maroon) 0%, var(--maroon-mid) 100%);
+    color: var(--white);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--gold);
+  }
+  .form-title-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+  }
+  .form-title-card .badge {
+    background: var(--gold);
+    color: var(--maroon);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* ── Main card ── */
+  .card {
+    background: var(--cream-card);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-top: none;
+  }
+
+  /* ── Section headers ── */
+  .section-header {
+    background: var(--cream-section);
+    border-left: 4px solid var(--gold);
+    padding: 9px 24px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+
+  /* ── Fields ── */
+  .fields {
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    background: var(--cream-card);
+  }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.79rem;
+    font-weight: 600;
+    color: var(--maroon);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  label .num {
+    background: var(--maroon);
+    color: var(--white);
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="datetime-local"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 13px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.91rem;
+    color: var(--text-dark);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(200,150,42,0.15);
+  }
+  select { cursor: pointer; }
+  textarea { resize: vertical; min-height: 70px; }
+
+  /* radio group */
+  .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 15px;
+    font-size: 0.87rem;
+    font-weight: 500;
+    transition: all 0.18s;
+    flex: 1;
+    min-width: 120px;
+    color: var(--text-mid);
+  }
+  .radio-option:has(input:checked) {
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(107,16,32,0.25);
+  }
+  .radio-option input { display: none; }
+
+  /* checkbox group */
+  .check-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .check-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 13px;
+    font-size: 0.83rem;
+    font-weight: 500;
+    transition: all 0.18s;
+    color: var(--text-mid);
+  }
+  .check-option:has(input:checked) {
+    background: var(--gold);
+    border-color: var(--gold-light);
+    color: var(--maroon);
+    font-weight: 700;
+  }
+  .check-option input { display: none; }
+
+  /* divider */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* salesman display */
+  .salesman-display {
+    background: linear-gradient(90deg, var(--maroon), var(--maroon-mid));
+    color: var(--white);
+    border-radius: 8px;
+    padding: 11px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.02em;
+  }
+  .salesman-display .dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--gold);
+  }
+
+  /* office section header */
+  .section-header-office {
+    background: #2a1010;
+    border-left: 4px solid var(--gold);
+    padding: 9px 24px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  /* submit row */
+  .submit-row {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 2px solid var(--cream-section);
+    background: #faf2e8;
+    flex-wrap: wrap;
+  }
+  .btn-submit {
+    background: linear-gradient(90deg, var(--maroon), var(--maroon-mid));
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 13px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 14px rgba(107,16,32,0.35);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(107,16,32,0.4); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .btn-reset {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-reset:hover { border-color: var(--maroon); color: var(--maroon); }
+
+  /* toast */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--maroon);
+    color: var(--white);
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.88rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 1000;
+    max-width: 360px;
+    border-left: 4px solid var(--gold);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.error { background: #7f1d1d; border-left-color: #f87171; }
+
+  /* spinner */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    width: 15px; height: 15px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: var(--white);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+
+
+
+  @media (max-width: 600px) {
+    .fields { grid-template-columns: 1fr; }
+    .form-title-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .header-right { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-mark">🌿</div>
+    <div class="header-text">
+      <div class="header-text-top">Swargaseema's</div>
+      <h1>Customer Intake Portal</h1>
+    </div>
+    <div class="header-right">
+      <div class="status-pill"><span class="dot dot-green"></span> Live</div>
+      <div class="status-pill"><span class="dot dot-red"></span> Executive Form</div>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+</header>
+
+<div class="page">
+
+
+  <!-- Form title -->
+  <div class="form-title-card">
+    <h2>Customer Information Form</h2>
+    <span class="badge">Executive Use</span>
+  </div>
+
+  <div class="card">
+    <form id="mainForm" novalidate>
+
+      <!-- Section 1: Visit Info -->
+      <div class="section-header">Visit Information</div>
+      <div class="fields">
+        <div class="field">
+          <label><span class="num">1</span>Date &amp; Time of Visit</label>
+          <input type="datetime-local" name="visitDateTime" id="visitDateTime" required>
+        </div>
+        <div class="field">
+          <label><span class="num">8</span>Visit From Location</label>
+          <input type="text" name="visitFromLocation" placeholder="City / Area">
+        </div>
+        <div class="field full">
+          <label><span class="num">9</span>Mode of Visit</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="modeOfVisit" value="Own Vehicle"> 🚗 Own Vehicle
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="modeOfVisit" value="Company Vehicle"> 🚌 Company Vehicle
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="modeOfVisit" value="Other"> 🚕 Other
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Section 2: Personal Info -->
+      <div class="section-header">Customer Personal Details</div>
+      <div class="fields">
+        <div class="field">
+          <label><span class="num">2</span>Full Name *</label>
+          <input type="text" name="fullName" placeholder="Enter full name" required>
+        </div>
+        <div class="field">
+          <label><span class="num">3</span>Age</label>
+          <input type="number" name="age" placeholder="e.g. 35" min="18" max="99">
+        </div>
+        <div class="field">
+          <label><span class="num">4</span>Occupation</label>
+          <input type="text" name="occupation" placeholder="Profession / Business">
+        </div>
+        <div class="field">
+          <label><span class="num">5</span>Contact Number *</label>
+          <input type="tel" name="contactNumber" placeholder="+91 XXXXX XXXXX" required>
+        </div>
+        <div class="field">
+          <label><span class="num">6</span>Email Address</label>
+          <input type="email" name="email" placeholder="email@example.com">
+        </div>
+        <div class="field full">
+          <label><span class="num">7</span>Permanent Address</label>
+          <textarea name="permanentAddress" placeholder="Full address with city, state, pincode..."></textarea>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Section 3: Interest -->
+      <div class="section-header">Interest &amp; Source</div>
+      <div class="fields">
+        <div class="field full">
+          <label><span class="num">10</span>Looking For</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="lookingFor" value="Farm Land"> 🌾 Farm Land
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="lookingFor" value="DTCP Plot"> 🏗️ DTCP Plot
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="lookingFor" value="Both"> 🌿 Both
+            </label>
+          </div>
+        </div>
+        <div class="field">
+          <label><span class="num">11</span>Budget</label>
+          <input type="text" name="budget" placeholder="e.g. ₹20 Lakhs – ₹50 Lakhs">
+        </div>
+        <div class="field full">
+          <label><span class="num">12</span>How did you know about Swargaseema?</label>
+          <div class="check-group" id="sourceGroup">
+            <label class="check-option"><input type="checkbox" name="source" value="TV"> 📺 TV</label>
+            <label class="check-option"><input type="checkbox" name="source" value="Hoardings"> 🪧 Hoardings</label>
+            <label class="check-option"><input type="checkbox" name="source" value="Print Media"> 📰 Print Media</label>
+            <label class="check-option"><input type="checkbox" name="source" value="Metro"> 🚇 Metro</label>
+            <label class="check-option"><input type="checkbox" name="source" value="Friends/Referral"> 👥 Friends / Referral</label>
+            <label class="check-option"><input type="checkbox" name="source" value="Social Media"> 📱 Social Media</label>
+            <label class="check-option"><input type="checkbox" name="source" value="Online Ads"> 💻 Online Ads</label>
+            <label class="check-option"><input type="checkbox" name="source" value="Others"> ➕ Others</label>
+          </div>
+        </div>
+        <div class="field full" id="otherSourceField" style="display:none;">
+          <label>Please specify other source</label>
+          <input type="text" name="otherSource" placeholder="Please specify...">
+        </div>
+        <div class="field full">
+          <label>Additional Notes / Remarks</label>
+          <textarea name="customerNotes" placeholder="Any additional info about the customer or visit..."></textarea>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Office Use Section -->
+      <div class="section-header-office">🏢 &nbsp;For Office Use Only</div>
+      <div class="fields">
+        <div class="field">
+          <label>Executive Name *</label>
+          <input type="text" name="executiveName" placeholder="Name of the executive" required>
+        </div>
+        <div class="field">
+          <label>Assign Salesman</label>
+          <select name="salesmanAssigned" id="salesmanSelect" onchange="updateSalesmanDisplay()">
+            <option value="">— Select Salesman —</option>
+            <option>Ravi Kumar</option>
+            <option>Suresh Reddy</option>
+            <option>Anita Sharma</option>
+            <option>Mahesh Yadav</option>
+            <option>Priya Nair</option>
+            <option>Kiran Babu</option>
+            <option>Deepak Singh</option>
+            <option>Lakshmi Devi</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Assigned Salesman</label>
+          <div class="salesman-display" id="salesmanDisplay">
+            <span style="opacity:0.5;font-weight:400;font-size:0.85rem;">No salesman assigned yet</span>
+          </div>
+        </div>
+        <div class="field full">
+          <label>Office Remarks</label>
+          <textarea name="officeRemarks" placeholder="Internal notes, follow-up actions, etc."></textarea>
+        </div>
+      </div>
+
+      <!-- Submit row -->
+      <div class="submit-row">
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span id="submitText">Submit &amp; Save to Sheet</span>
+        </button>
+        <button type="button" class="btn-reset" onclick="resetForm()">Clear Form</button>
+        <span id="submitNote" style="font-size:0.78rem;color:var(--text-mid);margin-left:auto;">All fields marked * are required</span>
+      </div>
+
+    </form>
+  </div>
+
+
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Salesman display ──────────────────────────────────────
+function updateSalesmanDisplay() {
+  const sel = document.getElementById('salesmanSelect');
+  const disp = document.getElementById('salesmanDisplay');
+  if (sel.value) {
+    disp.innerHTML = `<span class="dot"></span> ${sel.value}`;
+  } else {
+    disp.innerHTML = `<span style="opacity:0.5;font-weight:400;font-size:0.85rem;">No salesman assigned yet</span>`;
+  }
+}
+
+// ── "Others" checkbox toggle ──────────────────────────────
+document.querySelectorAll('input[name="source"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const othersChecked = [...document.querySelectorAll('input[name="source"]')]
+      .find(c => c.value === 'Others')?.checked;
+    document.getElementById('otherSourceField').style.display = othersChecked ? 'flex' : 'none';
+  });
+});
+
+// ── Hardcoded Google Sheets URL ───────────────────────────
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzrseXQuDSxFLtGNur9JnWZTR4Otqf_WJ0ICPmMsDb7CHmB7pmBMV6v9Ixs7OfvbkD5/exec";
+
+window.addEventListener('load', () => {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('visitDateTime').value = now.toISOString().slice(0, 16);
+});
+
+// ── Toast ─────────────────────────────────────────────────
+function showToast(msg, isError = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (isError ? ' error' : '');
+  setTimeout(() => t.classList.add('show'), 10);
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// ── Form submit ───────────────────────────────────────────
+document.getElementById('mainForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  // Basic validation
+  const required = ['fullName', 'contactNumber', 'executiveName'];
+  let allOk = true;
+  required.forEach(n => {
+    const el = this.elements[n];
+    if (!el.value.trim()) { el.style.borderColor = '#e53e3e'; allOk = false; }
+    else el.style.borderColor = '';
+  });
+  if (!allOk) { showToast('⚠️ Please fill in all required fields.', true); return; }
+
+  // Gather sources
+  const sources = [...document.querySelectorAll('input[name="source"]:checked')].map(c => c.value);
+  const otherSrc = document.querySelector('[name="otherSource"]')?.value?.trim();
+  if (otherSrc) sources.push('Others: ' + otherSrc);
+
+  const fd = new FormData(this);
+  const data = {
+    visitDateTime:      fd.get('visitDateTime') || '',
+    fullName:           fd.get('fullName') || '',
+    age:                fd.get('age') || '',
+    occupation:         fd.get('occupation') || '',
+    contactNumber:      fd.get('contactNumber') || '',
+    email:              fd.get('email') || '',
+    permanentAddress:   fd.get('permanentAddress') || '',
+    visitFromLocation:  fd.get('visitFromLocation') || '',
+    modeOfVisit:        fd.get('modeOfVisit') || '',
+    lookingFor:         fd.get('lookingFor') || '',
+    budget:             fd.get('budget') || '',
+    source:             sources.join(', '),
+    customerNotes:      fd.get('customerNotes') || '',
+    executiveName:      fd.get('executiveName') || '',
+    salesmanAssigned:   fd.get('salesmanAssigned') || '',
+    officeRemarks:      fd.get('officeRemarks') || ''
+  };
+
+  // UI: loading
+  const btn = document.getElementById('submitBtn');
+  const txt = document.getElementById('submitText');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Saving...';
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    showToast('✅ Customer data saved to Google Sheet!');
+    setTimeout(() => resetForm(), 1200);
+  } catch (err) {
+    showToast('❌ Failed to save. Check your internet connection.', true);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span id="submitText">Submit &amp; Save to Sheet</span>';
+  }
+});
+
+// ── Reset ─────────────────────────────────────────────────
+function resetForm() {
+  document.getElementById('mainForm').reset();
+  updateSalesmanDisplay();
+  document.getElementById('otherSourceField').style.display = 'none';
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('visitDateTime').value = now.toISOString().slice(0, 16);
+  document.querySelectorAll('input[style]').forEach(el => el.style.borderColor = '');
+}
+</script>
+</body>
+</html>
